@@ -2213,6 +2213,6 @@ function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/PENTHOUSE_Quartz.glb");
+useGLTF.preload("/PENTHOUSE_Quartz.glb", true);
 
 export default Model;
