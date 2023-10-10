@@ -27,18 +27,33 @@ body {
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
+ 
 }
 
-.title {
-  right: 5%;
-  font-size: 0.8rem;
-  color: darkgray;
+@media only screen and (max-width: 600px)  {
+  .controlKeys {
+    display: none;
+  }
+}
+div[data-testid="joystick-base"] {
   position: absolute;
-  width: 40%;
-  bottom: 2%;
-  text-align: center;
+  bottom: 10px;
+  left: 10px;
 }
 
-.title > a {
-  color: rgb(79, 189, 249);
+.row
+{
+	display: inline-flex;
+	clear: both;
+}
+@media only screen and (min-width: 601px)  {
+  #joy2Div {
+    display: none;
+  }
+}
+#joy2Div
+{
+	width:200px;
+	height:200px;
+	margin:50px
 }

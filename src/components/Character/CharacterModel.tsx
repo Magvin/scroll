@@ -10,7 +10,6 @@ import { useGLTF } from "@react-three/drei";
 
 export default function CharacterModel(props: any) {
   const { nodes, materials } = useGLTF("/ghost.glb") as any;
-
   return (
     <group {...props}>
       <group scale={0.0034} position={[0, 0, 0]}>

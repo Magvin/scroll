@@ -2453,6 +2453,11 @@
   resolved "https://registry.npmjs.org/@types/stats.js/-/stats.js-0.17.1.tgz"
   integrity sha512-OgfYE1x2w1jRUXzzKABX+kOdwz2y9PE0uSwnZabkWfJTWOzm7Pvfm4JI2xqRE0q2nwUe2jZLWcrcnhd9lQU63w==
 
+"@types/three@^0.140.0":
+  version "0.140.0"
+  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.140.0.tgz#3b74a021a69a6e2cd0e2550def15aa4c1c20e924"
+  integrity sha512-YPJLSIY6uKUOp1k6BZYDq5GtEIdhfeK04UCbc9IPAVbdn/RNjkfrbnyd7smrsNkJhc0IFASLpd3AAYgwqgXKVQ==
+
 "@types/three@^0.156.0":
   version "0.156.0"
   resolved "https://registry.npmjs.org/@types/three/-/three-0.156.0.tgz"
@@ -2589,6 +2594,14 @@
   dependencies:
     "@typescript-eslint/types" "5.62.0"
     eslint-visitor-keys "^3.3.0"
+
+"@unegma/react-three-fpscontrols@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@unegma/react-three-fpscontrols/-/react-three-fpscontrols-1.6.0.tgz#10a02e920c06c0ffcd6bf0f8b20dca65bf934898"
+  integrity sha512-Vo5CUqSv9NI+DgFrdz181ou2OX7Z/ETV+3YWB3RqAZ9z9gi22Q4ArpseL3jTSNi7L54PlBOOOHF1KJYioFoedA==
+  dependencies:
+    "@types/three" "^0.140.0"
+    nipplejs "0.9.0"
 
 "@use-gesture/core@10.2.24":
   version "10.2.24"
@@ -6953,6 +6966,11 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+nipplejs@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/nipplejs/-/nipplejs-0.9.0.tgz#b5fcfcc7a85bf3e025cd3955a738ef9dc0bb0afe"
+  integrity sha512-TH2CkxWiTAnc0ld/Q8wQMFAhlWTL1QYWuwNLqmMzh8Y1dLv3ECKYydkfiyoiRwSy+fQvCukXvu2RSHinvjOoUg==
+
 no-case@^3.0.4:
   version "3.0.4"
   resolved "https://registry.npmjs.org/no-case/-/no-case-3.0.4.tgz"
@@ -8132,6 +8150,11 @@ react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
+
+react-joystick-component@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/react-joystick-component/-/react-joystick-component-6.2.1.tgz#3efed68fa3da03afb7e45d0d6e9d58f9b0c0cca0"
+  integrity sha512-0G5Y5aX4hNuXB3xJCwz6Q+nYQOtC6kprNGKmZxmfoPvhepNYUiid0DbLEGZxmr/UKip3S/LUbcQUobtRCuB8IQ==
 
 react-merge-refs@^1.1.0:
   version "1.1.0"
@@ -9636,6 +9659,11 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
+
+virtual-joystick@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/virtual-joystick/-/virtual-joystick-1.0.0.tgz#53160c8bce067802d8c5b82758c6d87f66e00029"
+  integrity sha512-5SH426+aIxp04MYgaBJ1Bjn4+idtEyrQRjYPa5jTjSCBEkF39VZOc6Q5TVQ1a27BTq5Dlu8BZdziSxfJToIm/w==
 
 w3c-hr-time@^1.0.2:
   version "1.0.2"

@@ -8,14 +8,17 @@
     "@react-three/drei": "9.88.0",
     "@react-three/fiber": "^8.14.5",
     "@react-three/rapier": "1.1.1",
+    "@unegma/react-three-fpscontrols": "^1.6.0",
     "@use-gesture/core": "10.2.24",
     "@use-gesture/react": "^10.3.0",
     "leva": "0.9.34",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-joystick-component": "^6.2.1",
     "react-scripts": "latest",
     "three": "^0.157.0",
     "typescript": "^5.2.2",
+    "virtual-joystick": "^1.0.0",
     "zustand": "^4.4.3"
   },
   "scripts": {

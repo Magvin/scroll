@@ -1,12 +1,13 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import {
   Environment,
   KeyboardControls,
   useProgress,
   Html,
+  PointerLockControls,
 } from "@react-three/drei";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import Lights from "../Character/Lights";
 import Map from "../Character/Map";
 import CharacterModel from "../Character/CharacterModel";
@@ -16,11 +17,12 @@ function Loader() {
   const { progress } = useProgress();
   return <Html center>{progress} % loaded</Html>;
 }
-
+// creates a centralized joystick
 function GLBPlayer() {
   /**
    * Keyboard control preset
    */
+
   const keyboardMap = [
     { name: "forward", keys: ["ArrowUp", "KeyW"] },
     { name: "backward", keys: ["ArrowDown", "KeyS"] },
@@ -31,27 +33,33 @@ function GLBPlayer() {
   ];
 
   return (
-    <Canvas
-      shadows
-      onPointerDown={(e: any) => {
-        if (e.target.requestPointerLock) {
-          e.target.requestPointerLock();
-        }
-      }}
-    >
-      <Environment background files="/clouds.hdr" />
-      <Lights />
-      <Suspense fallback={<Loader />}>
-        <Physics timeStep="vary">
-          <KeyboardControls map={keyboardMap}>
-            <Ecctrl animated={true}>
-              <CharacterModel userData={{ camExcludeCollision: true }} />
-            </Ecctrl>
-          </KeyboardControls>
-          <Map />
-        </Physics>
-      </Suspense>
-    </Canvas>
+    <>
+      <Canvas shadows dpr={[1, 2]}>
+        <Environment background files="/clouds.hdr" />
+        <Lights />
+        <Suspense fallback={<Loader />}>
+          <Physics timeStep="vary">
+            <KeyboardControls map={keyboardMap}>
+              <Ecctrl animated={true}>
+                <CharacterModel userData={{ camExcludeCollision: true }} />
+              </Ecctrl>
+            </KeyboardControls>
+            <Map />
+          </Physics>
+
+          <PointerLockControls />
+        </Suspense>
+      </Canvas>
+      {/* <Joystick
+        size={100}
+        sticky={true}
+        baseColor="red"
+        stickColor="blue"
+        
+        move={(move) => setMovementsDirection(move.direction)}
+        stop={() => setMovementsDirection(null)}
+      /> */}
+    </>
   );
 }
 
