@@ -206,7 +206,7 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>;
 function Model(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
   const { nodes, materials, animations } = useGLTF(
-    "/PENTHOUSE_Quartz.glb"
+    "/PENTHOUSE_Quartz-v1.glb"
   ) as GLTFResult;
   useAnimations<any>(animations, group);
   return (
@@ -2213,6 +2213,6 @@ function Model(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/PENTHOUSE_Quartz.glb", true);
+useGLTF.preload("/PENTHOUSE_Quartz-v1.glb", true);
 
 export default Model;

@@ -6,7 +6,7 @@ import {
   useProgress,
   Html,
 } from "@react-three/drei";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import Lights from "../Character/Lights";
 import Map from "../Character/Map";
 import CharacterModel from "../Character/CharacterModel";
