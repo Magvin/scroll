@@ -35,25 +35,9 @@ body {
     display: none;
   }
 }
-div[data-testid="joystick-base"] {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-}
 
-.row
-{
-	display: inline-flex;
-	clear: both;
-}
 @media only screen and (min-width: 601px)  {
-  #joy2Div {
+  #joy3Div {
     display: none;
   }
-}
-#joy2Div
-{
-	width:200px;
-	height:200px;
-	margin:50px
 }

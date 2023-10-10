@@ -253,7 +253,9 @@ function Model(props) {
       loader.setKTX2Loader(ktx2loader!);
     }
   ) as any;
-  const { actions } = useAnimations(animations, group);
+
+  useAnimations(animations, group);
+
   return (
     <RigidBody colliders="trimesh" type="fixed">
       <group ref={group} {...props} dispose={null} position={[1, -20, -7.9]}>

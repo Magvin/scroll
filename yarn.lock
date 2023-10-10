@@ -6609,6 +6609,11 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+lil-gui@^0.18.2:
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/lil-gui/-/lil-gui-0.18.2.tgz#e28a627be6a38bb80e9237817ad2c530eeb76279"
+  integrity sha512-DgdrLy3/KGC0PiQLKgOcJMPItP4xY4iWgJ9+91Zaxfr8GCTmMps05QS9w9jW7yspILlbscbquwjOwxmWnSx5Uw==
+
 lilconfig@^2.0.3, lilconfig@^2.0.5, lilconfig@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/lilconfig/-/lilconfig-2.1.0.tgz"

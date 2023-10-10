@@ -12,6 +12,7 @@
     "@use-gesture/core": "10.2.24",
     "@use-gesture/react": "^10.3.0",
     "leva": "0.9.34",
+    "lil-gui": "^0.18.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-joystick-component": "^6.2.1",

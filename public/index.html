@@ -31,12 +31,16 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <img class="controlKeys" src="./keyboard.png" alt="control keys" />
-    <div id="joy3Div" style="width:200px;height:200px;margin:50px;position:absolute;bottom:10px;left:0px;z-index:1000;"></div>
+    <div id="joy3Div" style="width:200px;height:200px;position:absolute;bottom:0px;left:0px;z-index:1000;"></div>
     <input id="joystickDir" hidden value=''/>
     <script>
         const dir = document.querySelector('#joystickDir')
 
-      var Joy1 = new JoyStick('joy3Div')
+      var Joy1 = new JoyStick('joy3Div',{
+        internalFillColor: '#ffffff26',
+        internalStrokeColor: '#fffdfd',
+        externalStrokeColor: '#fffdfd',
+      })
 setInterval(function(){ 
   dir.value=Joy1.GetDir(); 
   window.joystickDirection = dir.value

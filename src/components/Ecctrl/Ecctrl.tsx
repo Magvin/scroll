@@ -1,5 +1,5 @@
 import { useKeyboardControls } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import {
   RigidBody,
   CapsuleCollider,
@@ -8,10 +8,10 @@ import {
 } from "@react-three/rapier";
 import { useEffect, useRef, useMemo, ReactNode } from "react";
 import * as THREE from "three";
-import { useControls } from "leva";
 import { Collider, RayColliderToi, Vector } from "@dimforge/rapier3d-compat";
 import { useFollowCam } from "./hooks/useFollowCam";
 import { useGame } from "./stores/useGame";
+import { useControls } from "leva";
 
 export { EcctrlAnimation } from "./EcctrlAnimation";
 
@@ -412,6 +412,7 @@ export default function Ecctrl({
   const moveCharacter = (
     _: number,
     run: boolean,
+    mobileSideControls: boolean,
     slopeAngle: number,
     movingObjectVelocity: THREE.Vector3
   ) => {
@@ -464,8 +465,10 @@ export default function Ecctrl({
      */
     moveAccNeeded.set(
       (movingDirection.x *
-        (maxVelLimit * (run ? sprintMult : 1) +
-          movingObjectVelocityInCharacterDir.x) -
+        (!mobileSideControls
+          ? maxVelLimit
+          : 15 * (run ? sprintMult : 1) +
+            movingObjectVelocityInCharacterDir.x) -
         (currentVel.x -
           movingObjectVelocity.x *
             Math.sin(angleBetweenCharacterDirAndObjectDir) +
@@ -473,8 +476,10 @@ export default function Ecctrl({
         accDeltaTime,
       0,
       (movingDirection.z *
-        (maxVelLimit * (run ? sprintMult : 1) +
-          movingObjectVelocityInCharacterDir.z) -
+        (!mobileSideControls
+          ? maxVelLimit
+          : 15 * (run ? sprintMult : 1) +
+            movingObjectVelocityInCharacterDir.z) -
         (currentVel.z -
           movingObjectVelocity.z *
             Math.sin(angleBetweenCharacterDirAndObjectDir) +
@@ -646,15 +651,14 @@ export default function Ecctrl({
     const forw = direction === "N";
     const RIGHT = direction === "E";
     const LEFT = direction === "W";
-    const backAndRight = direction === "SW";
+    const backAndRight = direction === "SE";
     const backAndLEFT = direction === "SW";
     const frontLEFT = direction === "NW";
     const frontRight = direction === "NE";
-    let mobileRun = false;
+    let mobileSide = false;
 
-    // If one of the mobile controllers are triggered then run is activated
-    if (RIGHT || LEFT || backAndLEFT || backAndRight || forw || back) {
-      mobileRun = true;
+    if (forw || LEFT || RIGHT || back) {
+      mobileSide = false;
     }
 
     // Getting moving directions
@@ -684,7 +688,9 @@ export default function Ecctrl({
       // Apply camera rotation to character model
       modelEuler.y = pivot.rotation.y + Math.PI / 4 + Math.PI;
     }
-
+    if (backAndLEFT || backAndRight || frontLEFT || frontRight) {
+      mobileSide = true;
+    }
     // Move character to the moving direction
     if (
       forward ||
@@ -699,8 +705,9 @@ export default function Ecctrl({
       backAndRight ||
       frontLEFT ||
       frontRight
-    )
-      moveCharacter(delta, run || mobileRun, slopeAngle, movingObjectVelocity);
+    ) {
+      moveCharacter(delta, run, mobileSide, slopeAngle, movingObjectVelocity);
+    }
 
     // Character current velocity
     if (characterRef.current) {
@@ -761,18 +768,6 @@ export default function Ecctrl({
       // I have no idea
       characterRef.current as unknown as Collider
     );
-    /** Test shape ray */
-    // rayHit = world.castShape(
-    //   currentPos,
-    //   { w: 0, x: 0, y: 0, z: 0 },
-    //   {x:0,y:-1,z:0},
-    //   shape,
-    //   rayLength,
-    //   true,
-    //   null,
-    //   null,
-    //   characterRef.current
-    // );
 
     if (rayHit && rayHit.toi < floatingDis + rayHitForgiveness) {
       if (slopeRayHit && actualSlopeAngle < 1) {
@@ -834,7 +829,9 @@ export default function Ecctrl({
           // Apply opposite drage force to the stading rigid body, body type 0
           // Character moving and unmoving should provide different drag force to the platform
           if (rayHitObjectBodyType === 0) {
-            if (!forward && !backward && !leftward && !rightward && canJump) {
+            const desktop = !forward && !backward && !leftward && !rightward;
+            const mobile = !forw && !back && !LEFT && !RIGHT;
+            if ((desktop || mobile) && canJump) {
               movingObjectDragForce.set(
                 (currentVel.x - movingObjectVelocity.x) * dragDampingC,
                 0,

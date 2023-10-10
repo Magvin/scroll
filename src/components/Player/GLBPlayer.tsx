@@ -1,24 +1,28 @@
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import {
   Environment,
   KeyboardControls,
   useProgress,
   Html,
-  PointerLockControls,
+  OrbitControls,
+  PerspectiveCamera,
 } from "@react-three/drei";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import Lights from "../Character/Lights";
 import Map from "../Character/Map";
 import CharacterModel from "../Character/CharacterModel";
 import Ecctrl from "../Ecctrl/Ecctrl";
+import { PointerLockControls } from "../utils/CustomePointerLock";
+import { Group } from "three";
 
 function Loader() {
   const { progress } = useProgress();
   return <Html center>{progress} % loaded</Html>;
 }
 // creates a centralized joystick
-function GLBPlayer() {
+function GLBPlayer({ dom }: any) {
+  const canvasRef = useRef();
   /**
    * Keyboard control preset
    */
@@ -32,33 +36,27 @@ function GLBPlayer() {
     { name: "run", keys: ["Shift"] },
   ];
 
+  const camera = useThree().camera;
+  const PointerLock = new PointerLockControls(camera, dom.current);
+
+  PointerLock.connect();
+
+  dom.current.addEventListener("click", (e) => PointerLock.lock());
+
   return (
     <>
-      <Canvas shadows dpr={[1, 2]}>
-        <Environment background files="/clouds.hdr" />
-        <Lights />
-        <Suspense fallback={<Loader />}>
-          <Physics timeStep="vary">
-            <KeyboardControls map={keyboardMap}>
-              <Ecctrl animated={true}>
-                <CharacterModel userData={{ camExcludeCollision: true }} />
-              </Ecctrl>
-            </KeyboardControls>
-            <Map />
-          </Physics>
-
-          <PointerLockControls />
-        </Suspense>
-      </Canvas>
-      {/* <Joystick
-        size={100}
-        sticky={true}
-        baseColor="red"
-        stickColor="blue"
-        
-        move={(move) => setMovementsDirection(move.direction)}
-        stop={() => setMovementsDirection(null)}
-      /> */}
+      <Environment background files="/clouds.hdr" />
+      <Lights />
+      <Suspense fallback={<Loader />}>
+        <Physics timeStep="vary">
+          <KeyboardControls map={keyboardMap}>
+            <Ecctrl>
+              <CharacterModel userData={{ camExcludeCollision: true }} />
+            </Ecctrl>
+          </KeyboardControls>
+          <Map />
+        </Physics>
+      </Suspense>
     </>
   );
 }
