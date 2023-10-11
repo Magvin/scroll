@@ -5,7 +5,7 @@ import { useRef } from "react";
 function App() {
   const canvasRef = useRef();
   return (
-    <Canvas shadows dpr={[1, 2]} ref={canvasRef}>
+    <Canvas shadows dpr={[1, 2]} ref={canvasRef} id="mainScene">
       <GLBPlayer dom={canvasRef} />
     </Canvas>
   );
