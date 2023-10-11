@@ -978,12 +978,34 @@ export default function Ecctrl({
         !leftward &&
         !rightward &&
         !jump &&
+        !forw &&
+        !LEFT &&
+        !RIGHT &&
+        !back &&
+        !backAndLEFT &&
+        !backAndRight &&
+        !frontLEFT &&
+        !frontRight &&
         canJump
       ) {
         idleAnimation();
       } else if (jump && canJump) {
         jumpAnimation();
-      } else if (canJump && (forward || backward || leftward || rightward)) {
+      } else if (
+        canJump &&
+        (forward ||
+          backward ||
+          leftward ||
+          rightward ||
+          back ||
+          forw ||
+          LEFT ||
+          RIGHT ||
+          backAndLEFT ||
+          backAndRight ||
+          frontLEFT ||
+          frontRight)
+      ) {
         run ? runAnimation() : walkAnimation();
       } else if (!canJump) {
         jumpIdleAnimation();

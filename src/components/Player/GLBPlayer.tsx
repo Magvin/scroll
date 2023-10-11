@@ -67,9 +67,7 @@ function GLBPlayer({ character }) {
                     userData={{ camExcludeCollision: true }}
                   />
                 ) : (
-                  <CharacterDemonModel
-                    userData={{ camExcludeCollision: true }}
-                  />
+                  <CharacterDemonModel />
                 )}
               </EcctrlAnimation>
             </Ecctrl>
