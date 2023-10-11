@@ -1,20 +1,17 @@
-import { Canvas, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import {
   Environment,
   KeyboardControls,
   useProgress,
   Html,
-  OrbitControls,
-  PerspectiveCamera,
+  PointerLockControls,
 } from "@react-three/drei";
-import { Suspense, useEffect, useMemo, useRef } from "react";
+import { Suspense, useRef } from "react";
 import Lights from "../Character/Lights";
 import Map from "../Character/Map";
 import CharacterModel from "../Character/CharacterModel";
 import Ecctrl from "../Ecctrl/Ecctrl";
-import { PointerLockControls } from "../utils/CustomePointerLock";
-import { Group } from "three";
 
 function Loader() {
   const { progress } = useProgress();
@@ -36,18 +33,11 @@ function GLBPlayer({ dom }: any) {
     { name: "run", keys: ["Shift"] },
   ];
 
-  const camera = useThree().camera;
-  const PointerLock = new PointerLockControls(camera, dom.current);
-
-  PointerLock.connect();
-
-  dom.current.addEventListener("click", (e) => PointerLock.lock());
-
   return (
     <>
-      <Environment background files="/clouds.hdr" />
-      <Lights />
       <Suspense fallback={<Loader />}>
+        <Environment background files="/clouds.hdr" />
+        <Lights />
         <Physics timeStep="vary">
           <KeyboardControls map={keyboardMap}>
             <Ecctrl>
@@ -56,6 +46,7 @@ function GLBPlayer({ dom }: any) {
           </KeyboardControls>
           <Map />
         </Physics>
+        <PointerLockControls />
       </Suspense>
     </>
   );

@@ -647,6 +647,8 @@ export default function Ecctrl({
      */
     const { forward, backward, leftward, rightward, jump, run } = getKeys();
     const direction = (window as any).joystickDirection;
+    const camera = (window as any).cameraJoystickControls;
+    const cameraLeft = camera === "W";
     const back = direction === "S";
     const forw = direction === "N";
     const RIGHT = direction === "E";

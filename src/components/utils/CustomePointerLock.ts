@@ -96,8 +96,9 @@ class PointerLockControls extends EventDispatcher {
       _PI_2 - this.maxPolarAngle,
       Math.min(_PI_2 - this.minPolarAngle, this.euler.x)
     );
-    console.log(this.camera);
+
     this.camera.quaternion.setFromEuler(this.euler);
+    console.log(movementX, movementY);
 
     (this.dispatchEvent as any)(_changeEvent);
   }

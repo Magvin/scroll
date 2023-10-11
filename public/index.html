@@ -32,17 +32,19 @@
     <div id="root"></div>
     <img class="controlKeys" src="./keyboard.png" alt="control keys" />
     <div id="joy3Div" style="width:200px;height:200px;position:absolute;bottom:0px;left:0px;z-index:1000;"></div>
+    <div id="joyDiv" style="width:200px;height:200px;position:absolute;bottom:0px;right:0px;z-index:1000;"></div>
     <input id="joystickDir" hidden value=''/>
     <script>
-        const dir = document.querySelector('#joystickDir')
+      const dir = document.querySelector('#joystickDir')
 
-      var Joy1 = new JoyStick('joy3Div',{
+      var JoyControl = new JoyStick('joy3Div',{
         internalFillColor: '#ffffff26',
         internalStrokeColor: '#fffdfd',
         externalStrokeColor: '#fffdfd',
       })
+
 setInterval(function(){ 
-  dir.value=Joy1.GetDir(); 
+  dir.value=JoyControl.GetDir(); 
   window.joystickDirection = dir.value
 }, 50);
     </script>
