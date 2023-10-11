@@ -56,13 +56,22 @@ export const useFollowCam = function (props: UseFollowCamProps) {
     if (document.pointerLockElement) {
       switch (e.touches.length) {
         case 1:
-          if (e.touches[0].target === document.querySelector("#mainScene"))
+          if (
+            e.touches[0].target ===
+            document.querySelector("#mainScene").querySelector("canvas")
+          )
             touch = e.touches[0];
           break;
         case 2:
-          if (e.touches[0].target === document.querySelector("#mainScene"))
+          if (
+            e.touches[0].target ===
+            document.querySelector("#mainScene").querySelector("canvas")
+          )
             touch = e.touches[0];
-          else if (e.touches[1].target === document.querySelector("#mainScene"))
+          else if (
+            e.touches[1].target ===
+            document.querySelector("#mainScene").querySelector("canvas")
+          )
             touch = e.touches[1];
           break;
       }
