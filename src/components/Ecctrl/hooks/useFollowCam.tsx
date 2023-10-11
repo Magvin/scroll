@@ -53,47 +53,45 @@ export const useFollowCam = function (props: UseFollowCamProps) {
 
   function onTouchMove(e: TouchEvent) {
     let touch: Touch | undefined;
-    if (document.pointerLockElement) {
-      switch (e.touches.length) {
-        case 1:
-          if (
-            e.touches[0].target ===
-            document.querySelector("#mainScene").querySelector("canvas")
-          )
-            touch = e.touches[0];
-          break;
-        case 2:
-          if (
-            e.touches[0].target ===
-            document.querySelector("#mainScene").querySelector("canvas")
-          )
-            touch = e.touches[0];
-          else if (
-            e.touches[1].target ===
-            document.querySelector("#mainScene").querySelector("canvas")
-          )
-            touch = e.touches[1];
-          break;
-      }
+    switch (e.touches.length) {
+      case 1:
+        if (
+          e.touches[0].target ===
+          document.querySelector("#mainScene").querySelector("canvas")
+        )
+          touch = e.touches[0];
+        break;
+      case 2:
+        if (
+          e.touches[0].target ===
+          document.querySelector("#mainScene").querySelector("canvas")
+        )
+          touch = e.touches[0];
+        else if (
+          e.touches[1].target ===
+          document.querySelector("#mainScene").querySelector("canvas")
+        )
+          touch = e.touches[1];
+        break;
+    }
 
-      if (!touch) return;
+    if (!touch) return;
 
-      const movementX = this.previousTouch
-        ? touch.pageX - this.previousTouch.pageX
-        : 0;
-      const movementY = this.previousTouch
-        ? touch.pageY - this.previousTouch.pageY
-        : 0;
+    const movementX = this.previousTouch
+      ? touch.pageX - this.previousTouch.pageX
+      : 0;
+    const movementY = this.previousTouch
+      ? touch.pageY - this.previousTouch.pageY
+      : 0;
 
-      pivot.rotation.y -= movementX * 0.002;
-      const vy = followCam.rotation.x + movementY * 0.002;
+    pivot.rotation.y -= movementX * 0.002;
+    const vy = followCam.rotation.x + movementY * 0.002;
 
-      this.previousTouch = touch;
-      if (vy >= -0.5 && vy <= 1.5) {
-        followCam.rotation.x = vy;
-        followCam.position.y = -cameraDistance * Math.sin(-vy);
-        followCam.position.z = -cameraDistance * Math.cos(-vy);
-      }
+    this.previousTouch = touch;
+    if (vy >= -0.5 && vy <= 1.5) {
+      followCam.rotation.x = vy;
+      followCam.position.y = -cameraDistance * Math.sin(-vy);
+      followCam.position.z = -cameraDistance * Math.cos(-vy);
     }
     return false;
   }
