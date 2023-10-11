@@ -6,7 +6,7 @@ import React from "react";
 import { useGLTF } from "@react-three/drei";
 
 export default function CharacterModel(props) {
-  const { nodes, materials } = useGLTF("/Demon.glb") as any;
+  const { nodes, materials } = useGLTF("/demon.glb") as any;
   for (const material in materials) {
     materials[material].metalness = -2;
     materials[material].roughness = 1;
@@ -72,4 +72,4 @@ export default function CharacterModel(props) {
   );
 }
 
-useGLTF.preload("/Demon.glb");
+useGLTF.preload("/demon.glb");
