@@ -89,7 +89,7 @@ export const useFollowCam = function (props: UseFollowCamProps) {
 
     this.previousTouch = touch;
     if (vy >= -0.5 && vy <= 1.5) {
-      followCam.rotation.x = vy;
+      //   followCam.rotation.x = vy;
       followCam.position.y = -cameraDistance * Math.sin(-vy);
       followCam.position.z = -cameraDistance * Math.cos(-vy);
     }
