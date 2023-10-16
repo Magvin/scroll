@@ -1,10 +1,11 @@
-import { useProgress, Html, Gltf, useGLTF, useScroll } from "@react-three/drei";
+import { useProgress, Html, useGLTF, useScroll } from "@react-three/drei";
 import { Suspense } from "react";
 import Lights from "../Character/Lights";
 import { PerspectiveCamera, useCurrentSheet } from "@theatre/r3f";
 import { TextureLoader } from "three";
 import { useFrame } from "@react-three/fiber";
 import { val } from "@theatre/core";
+import Map from "../Character/Map";
 
 import { WebGLExtensions } from "three/src/renderers/webgl/WebGLExtensions";
 // @ts-ignore
@@ -92,12 +93,7 @@ function GLBPlayer() {
         <directionalLight position={[0, 0, 0]} intensity={1.5} />
 
         <Lights />
-        <Gltf
-          src="/PENTHOUSE_Quartz-v1-v3.glb"
-          castShadow
-          receiveShadow
-          position={[-1, 0, -10]}
-        />
+        <Map />
         <PerspectiveCamera
           theatreKey="Camera"
           makeDefault
