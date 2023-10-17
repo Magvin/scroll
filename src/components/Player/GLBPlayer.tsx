@@ -13,7 +13,7 @@ import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
 
 function Loader() {
   const { progress } = useProgress();
-  return <Html center>{progress} % loaded</Html>;
+  return <Html center>{progress.toFixed()} % loaded</Html>;
 }
 /**
  * Character animation set preset

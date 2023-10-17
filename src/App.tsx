@@ -5,7 +5,7 @@ import { useContext, useReducer, useRef } from "react";
 import { getProject } from "@theatre/core";
 import { ScrollControls } from "@react-three/drei";
 import flyThrougState from "./weirdmovemnts.json";
-
+import { EffectComposer } from "@react-three/postprocessing";
 // our Theatre.js project sheet, we'll use this later
 const demoSheet = getProject("Demo Project", {
   state: flyThrougState,
@@ -40,7 +40,7 @@ function App() {
           preserveDrawingBuffer: true,
         }}
       >
-        <ScrollControls pages={5}>
+        <ScrollControls pages={10}>
           <SheetProvider sheet={demoSheet}>
             <GLBPlayer />
           </SheetProvider>
