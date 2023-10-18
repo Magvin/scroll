@@ -10,7 +10,6 @@ import { GLTF } from "three-stdlib";
 import { WebGLExtensions } from "three/src/renderers/webgl/WebGLExtensions";
 // @ts-ignore
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
-import { useCurrentSheet } from "@theatre/r3f";
 import { EcommerceContext } from "../Provider/Provider";
 
 type GLTFResult = GLTF & {
@@ -247,8 +246,7 @@ const setupKtx2 = () => {
 
 function Model(props) {
   const group = useRef();
-  const sheet = useCurrentSheet();
-  const bedRef = useRef();
+
   const { globalState, dispatch } = useContext(EcommerceContext);
   const { nodes, materials, animations } = useGLTF(
     "/PENTHOUSE_Quartz-v1-v3.glb",
@@ -261,8 +259,6 @@ function Model(props) {
   ) as any;
 
   useAnimations(animations, group);
-
-  const outlineRef = useRef();
 
   const meshRef = useRef();
 

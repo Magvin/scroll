@@ -1,7 +1,7 @@
-import React from "react";
+import { useState, useEffect } from 'react'
 import { useContext } from "react";
 import { EcommerceContext } from "../Provider/Provider";
-
+import detectEthereumProvider from '@metamask/detect-provider'
 
 // dummy db
 const assetStore = {
@@ -17,6 +17,31 @@ const assetStore = {
 
 const Modal = ({ open }) => {
   const { globalState, dispatch } = useContext(EcommerceContext);
+  const [hasProvider, setHasProvider] = useState(null)
+  const initialState = { accounts: [] }               /* New */
+  const [wallet, setWallet] = useState(initialState)  /* New */
+
+
+  useEffect(() => {
+    const getProvider = async () => {
+      const provider = await detectEthereumProvider({ silent: true })
+      console.log(provider)
+      setHasProvider(Boolean(provider)) // transform provider to true or false
+    }
+
+    getProvider()
+  }, [])
+
+  const updateWallet = async (accounts) => {     /* New */
+    setWallet({ accounts })                          /* New */
+  }                                                  /* New */
+
+  const handleConnect = async () => {                /* New */
+    let accounts = await window.ethereum.request({   /* New */
+      method: "eth_requestAccounts",                 /* New */
+    })                                               /* New */
+    updateWallet(accounts)                           /* New */
+  }                                                  /* New */
 return (
   <div className={` overlay animated ${open ? "show" : ""}`}>
     <div className="modal">
@@ -45,11 +70,21 @@ return (
       }}
       >
       <span>{assetStore[globalState.target].price}</span>
-      <button
+      <div style={{
+          display: 'flex',
+          gap: '8px',
+          justifyContent: 'space-between'
+      }}>
+    <button
       onClick={()=> {
         window.open(assetStore[globalState.target].url, '_blank').focus();
       }}
       >Buy now</button>
+       {hasProvider && 
+        <button onClick={handleConnect}>
+        Buy with crypto
+        </button>}
+      </div>
       </div>
       </>}
     </div>
