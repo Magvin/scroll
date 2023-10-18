@@ -1,12 +1,11 @@
 import "./App.css";
 import GLBPlayer from "./components/Player/GLBPlayer";
 import { Canvas } from "@react-three/fiber";
-import { useContext, useReducer, useRef } from "react";
+import { useReducer, useRef } from "react";
 import { getProject } from "@theatre/core";
 import { ScrollControls } from "@react-three/drei";
 import flyThrougState from "./weirdmovemnts.json";
-import { EffectComposer } from "@react-three/postprocessing";
-// our Theatre.js project sheet, we'll use this later
+
 const demoSheet = getProject("Demo Project", {
   state: flyThrougState,
 }).sheet("Demo Sheet");

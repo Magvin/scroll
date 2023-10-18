@@ -1,40 +1,30 @@
-import { useProgress, Html, useGLTF, useScroll } from "@react-three/drei";
+import {
+  useProgress,
+  Html,
+  useGLTF,
+  useScroll,
+  useCamera,
+} from "@react-three/drei";
 import { Suspense } from "react";
 import Lights from "../Character/Lights";
 import { PerspectiveCamera, useCurrentSheet } from "@theatre/r3f";
 import { TextureLoader } from "three";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { val } from "@theatre/core";
 import Map from "../Character/Map";
 
 import { WebGLExtensions } from "three/src/renderers/webgl/WebGLExtensions";
 // @ts-ignore
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader";
+import CharacterModel from "../Character/CharacterSpookyModel";
 
 function Loader() {
   const { progress } = useProgress();
   return <Html center>{progress.toFixed()} % loaded</Html>;
 }
-/**
- * Character animation set preset
- */
-const animationSet = {
-  idle: "CharacterArmature|Idle",
-  walk: "CharacterArmature|Walk",
-  run: "CharacterArmature|Run",
-  jump: "CharacterArmature|Jump",
-  jumpIdle: "CharacterArmature|Jump_Idle",
-  jumpLand: "CharacterArmature|Jump_Land",
-  fall: "CharacterArmature|Duck", // This is for falling from high sky
-  action1: "CharacterArmature|Wave",
-  action2: "CharacterArmature|Death",
-  action3: "CharacterArmature|HitReact",
-  action4: "CharacterArmature|Punch",
-};
 
 const KTX_CDN = "https://cdn.jsdelivr.net/gh/pmndrs/drei-assets@master/basis/";
 
-const textureLoader = new TextureLoader();
 let ktx2loader: KTX2Loader | undefined;
 
 // it's inconvenient to have to produce a gl object to check for ktx2 support, especially when it comes to the cache keys
@@ -94,6 +84,7 @@ function GLBPlayer() {
 
         <Lights />
         <Map />
+        <CharacterModel />
         <PerspectiveCamera
           theatreKey="Camera"
           makeDefault
